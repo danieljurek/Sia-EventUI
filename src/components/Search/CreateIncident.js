@@ -26,6 +26,7 @@ export const CreateIncident = ({ticketLookup, input, ticketSystem, creationError
         />
         <FlatButtonStyled
             label='Submit'
+            primary={true}
             onTouchTap={onSubmit(ticketLookup, input, dispatch, ticketSystem)}
         />
     </div>

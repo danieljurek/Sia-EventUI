@@ -9,25 +9,20 @@ import FlatButtonStyled from '../elements/FlatButtonStyled'
 
 export const Search = ({dispatch, queryString, dataSource, filteredDataSource}) => {
     return <div>
-                <CreateIncident/>
-                <FlatButtonStyled
-                    label='Refresh'
-                    primary={true}
-                    onTouchTap={() => dispatch(incidentActions.fetchIncidents())}
-                />
-                <br />
-                <AutoComplete
-                    hintText = 'e.g. Ticket ID, IM, Title, Owning Services ...'
-                    searchText = {queryString}
-                    dataSource = {dataSource}
-                    onUpdateInput = {(input) => dispatch(ticketActions.updateTicketQuery(input))}
-                    floatingLabelText = 'Incident Search'
-                    fullWidth = {true}
-                    />
-                <br />
-                <p />
-                <SearchResults query={filteredDataSource}/>
-            </div>
+        <p>
+            <CreateIncident />
+        </p>
+        <p>
+            <FlatButtonStyled
+                label='Show all incidents'
+                primary={true}
+                onTouchTap={() => dispatch(incidentActions.fetchIncidents())}
+            />
+        </p>
+        <p>
+            <SearchResults query={filteredDataSource} />
+        </p>
+    </div>
 }
 
 export const mapStateToProps = (state) => {
@@ -48,3 +43,24 @@ export const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(Search)
+
+/*
+                <CreateIncident/>
+                <FlatButtonStyled
+                    label='Refresh'
+                    primary={true}
+                    onTouchTap={() => dispatch(incidentActions.fetchIncidents())}
+                />
+                <br />
+                <AutoComplete
+                    hintText = 'e.g. Ticket ID, IM, Title, Owning Services ...'
+                    searchText = {queryString}
+                    dataSource = {dataSource}
+                    onUpdateInput = {(input) => dispatch(ticketActions.updateTicketQuery(input))}
+                    floatingLabelText = 'Incident Search'
+                    fullWidth = {true}
+                    />
+                <br />
+                <p />
+                <SearchResults query={filteredDataSource}/>
+*/
