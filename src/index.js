@@ -23,14 +23,14 @@ import incidentRedirect from './components/Incident/incidentRedirect'
 import TopNav from './components/TopNav/TopNav'
 import Debug from './components/Debug'
 import { ListenForScreenSize } from './actions/styleActions'
-import { ADAL } from './services/adalService'
+import { authContext } from './services/adalService'
 import signalR from './services/signalRService'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 export const store = createStore(incidentApp, composeEnhancers(applyMiddleware(thunk)))
 
 const signalRConnection = signalR(store.dispatch)
-const ADALInstance = ADAL(store.dispatch)
+const authenticationContext = authContext(store.dispatch)
 
 ListenForScreenSize(window, store)
 const history = createBrowserHistory()
@@ -42,7 +42,7 @@ class MainComponent extends React.Component {
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <Provider store={store}>
           <div>
-            <EnsureLoggedInContainer ADAL={ADALInstance}>
+            <EnsureLoggedInContainer ADAL={authenticationContext}>
               <Router history={history} >
                 <div>
                   <TopNav />
@@ -50,7 +50,7 @@ class MainComponent extends React.Component {
                   <Route exact path="/tickets/:ticketId" component={Ticket} />
                   <Route path="/tickets/:firstTicketId/compare/:secondTicketId" component={CompareTickets} />
                   <Route path="/incidents/:incidentId" component={incidentRedirect} />
-                  <Route path="/debug" render={() => <Debug authContext={ADALInstance}/>}/>
+                  <Route path="/debug" render={() => <Debug authContext={authenticationContext}/>}/>
                 </div>
               </Router>
             </EnsureLoggedInContainer>

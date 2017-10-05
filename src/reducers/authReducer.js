@@ -1,12 +1,12 @@
 import { USER_LOGGED_IN, USER_LOGGED_OUT, USER_LOGIN_ERROR, LOGIN_IN_PROGRESS } from '../actions/authActions.js'
-import { authContext, clientId } from '../services/adalService'
+import { authContext, specificAuthority } from '../services/adalService'
 
 const extractAliasFromUserName = (userName) => {
     return userName.slice(0, userName.indexOf('@'))
 }
 
 const getDefaultState = () => {
-    const token = authContext.getCachedToken(clientId)
+    const token = authContext().getCachedToken({authority:specificAuthority})
     const user = authContext.getCachedUser()
     return {
         isLoggedIn: (!!token),

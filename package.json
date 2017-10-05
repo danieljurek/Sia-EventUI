@@ -87,6 +87,7 @@
     "adal-angular": "^1.0.14",
     "cross-env": "^5.0.0",
     "express": "^4.15.2",
+    "msal": "^0.1.2",
     "msgpack5": "^3.5.1",
     "paginated-redux": "^0.2.2",
     "promise-retry": "^1.1.1",
