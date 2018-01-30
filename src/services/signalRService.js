@@ -27,7 +27,8 @@ const signalReduxConnection = (dispatch) => {
 }
 
 const configureConnection = (dispatch) => {
-  let connection = new signalR.HubConnection(defaultBasePath + 'events/live')
+  const hubConnectionUrl = new URL('events/live', defaultBasePath)
+  let connection = new signalR.HubConnection(hubConnectionUrl.toString())
 
   connection.on('Send', (event) => {
     const eventObject = JSON.parse(event)

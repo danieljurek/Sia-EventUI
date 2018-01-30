@@ -15,7 +15,8 @@ const defaultOptions = {
 const defaultScopes = [clientId]
 
 const tryFetch = (dispatch, relativeUrl, init, returnJson = true, baseUrl = defaultBasePath) => (retry, number) => {
-  return fetch(baseUrl + relativeUrl, init)
+  const urlToFetch = new URL(relativeUrl, baseUrl)
+  return fetch(urlToFetch.toString(), init)
         .then(response => {
           const localResponse = response
           dispatch(rawHttpResponse(response))
